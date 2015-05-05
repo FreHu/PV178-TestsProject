@@ -1,0 +1,52 @@
+﻿@model TestsProject.Models.ViewModels.StudentGroupDetailsVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Student Group</h4>
+    <hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.StudentGroup.Code)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.StudentGroup.Code)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.StudentGroup.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.StudentGroup.Name)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.StudentGroup.Description)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.StudentGroup.Description)
+		</dd>
+	</dl>
+	<h4>Users</h4>
+	<table class="table">
+		<th>Username</th>
+		<th></th>
+		@for (int i = 0; i < Model.MemberNames.Count; i++)
+		{
+			<tr>
+				<td>@Model.MemberNames[i]</td>
+				<td>@Html.ActionLink("Details", "Student", "Teacher",new {id=Model.MemberIds[i]}, new { })</td>
+			</tr>
+		}
+	</table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentGroup.Code }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

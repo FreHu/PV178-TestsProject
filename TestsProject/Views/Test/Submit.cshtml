@@ -1,0 +1,36 @@
+﻿@model TestsProject.Models.Entities.TestStats
+@{
+	ViewBag.Title = "Submit";
+}
+
+<h2>You have completed @Html.ValueFor(m => Model.TestParameters.Name)!</h2>
+<div class="row">
+	<div class="col-md-3">
+		@Html.LabelFor(m => Model.Correct):
+		@Html.ValueFor(m => Model.Correct)
+		<br/>
+		@Html.LabelFor(m => Model.Incorrect):
+		@Html.ValueFor(m => Model.Incorrect)
+		<br/>
+		@Html.LabelFor(m => Model.Unanswered):
+		@Html.ValueFor(m => Model.Unanswered)
+		<br/>
+		@Html.LabelFor(m => Model.PartiallyCorrect):
+		@Html.ValueFor(m => Model.PartiallyCorrect)
+		<br/>
+		@Html.LabelFor(m => Model.PartiallyIncorrect):
+		@Html.ValueFor(m => Model.PartiallyIncorrect)
+		<br/>
+		@Html.LabelFor(m => Model.TotalScore):
+		@Html.ValueFor(m => Model.TotalScore)
+		<br/>
+
+		@Html.LabelFor(m => Model.MaximumScore):
+		@Html.ValueFor(m => Model.MaximumScore)
+	</div>
+	<div class="col-md-6">
+		<br/>
+		<img src="@Url.Action("Chart", new {id = @Model.Id})"/>
+		<br/>
+	</div>
+</div>	

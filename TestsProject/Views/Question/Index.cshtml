@@ -1,0 +1,74 @@
+﻿@model IEnumerable<TestsProject.Models.Entities.Question>
+
+@{
+	ViewBag.Title = "Index - Questions";
+}
+
+<h2>Index</h2>
+
+<p>
+	@Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.Topic.Name)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.QuestionText)
+		</th>
+		<th>Answers</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Explanation)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.NumPoints)
+		</th>
+		<th></th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Topic.Name)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.QuestionText)
+			</td>
+			<td>
+				@foreach (var ans in item.Answers)
+				{
+
+					if (ans.IsCorrect)
+					{
+						<b class="green">
+							@Html.DisplayFor(modelItem => ans.Text)
+						</b>
+					}
+					else
+					{
+						@Html.DisplayFor(modelItem => ans.Text)
+					}
+					<br />
+				}
+
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Explanation)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.NumPoints)
+			</td>
+
+
+			<td>
+				@Html.ActionLink("Edit answers", "EditAnswers", new { id = item.QuestionId }) |
+				@Html.ActionLink("Edit", "Edit", new {id = item.QuestionId}) |
+				@Html.ActionLink("Details", "Details", new {id = item.QuestionId}) |
+				@Html.ActionLink("Delete", "Delete", new {id = item.QuestionId})
+			</td>
+		</tr>
+	}
+</table>
+@Html.ActionLink("<<Back", "Index", "Teacher")

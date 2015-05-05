@@ -1,0 +1,38 @@
+﻿@model TestsProject.Models.ViewModels.StudentGroupMembershipViewModel
+@{
+	ViewBag.Title = "Group";
+}
+
+<h2>Your Groups</h2>
+@if (ViewBag.ErrorMessage != null)
+{
+	<div class="alert alert-danger" role="alert">
+		@ViewBag.ErrorMessage
+	</div>
+}
+<table class="table">
+	<thead>
+	<th>Code</th>
+	<th>Group name</th>
+	</thead>
+	<tfoot>
+
+	</tfoot>
+	<tbody>
+	@foreach (var item in Model.Memberships)
+	{
+		<tr>
+			<td>@Html.DisplayFor(i => item.GroupCode)</td>
+			<td>@Html.DisplayFor(m => Model.StudentGroups.First(j => j.Code == item.GroupCode).Name)</td>
+		</tr>
+	}
+	</tbody>
+</table>
+<b>Join another group</b><br />
+@using (Html.BeginForm("Code", "Student"))
+			{
+			<input type="text" name="groupCode" placeholder="group code" />
+			<input type="submit" value="Submit" />
+}
+<br/>
+@Html.ActionLink("<<Back", "Index", "Student")

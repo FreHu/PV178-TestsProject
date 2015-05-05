@@ -1,0 +1,60 @@
+﻿@model TestsProject.Models.ViewModels.QuestionEditAnswersVM
+@{
+	ViewBag.Title = "Edit Answers";
+}
+
+<h2>Question - Edit Answers</h2>
+@if (ViewBag.ErrorMessage != null)
+{
+	<div class="alert alert-danger" role="alert">
+		@ViewBag.ErrorMessage
+	</div>
+}
+@Html.DisplayFor(m => m.Question.QuestionText)
+<br />
+<table class="table">
+	<thead>
+	<tr>
+		<th>Answer</th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var item in Model.Answers)
+	{
+		if (item.IsCorrect)
+		{
+			<tr class="success">
+				<td>@Html.DisplayFor(i => item.Text)</td>
+				<td>
+					@Html.ActionLink("Delete", "EditAnswersDelete", "Question", new {id = item.AnswerId}, new {})
+				</td>
+			</tr>
+		}
+		else
+		{
+			<tr>
+				<td>@Html.DisplayFor(i => item.Text)</td>
+				<td>
+					@Html.ActionLink("Delete", "EditAnswersDelete", "Question", new { id = item.AnswerId }, new { })
+				</td>
+			</tr>
+		}
+
+	}
+	</tbody>
+</table>
+
+<h3>New Answer</h3>
+@using (Html.BeginForm("EditAnswers", "Question"))
+{
+	<div class="form-group">
+		<input type="hidden" value="@Model.Question.QuestionId" name="questionId"/>
+		<input type="text" name="answerText" placeholder="Use $$ for LaTeX">
+	</div>
+	<div class="checkbox">Correct?<input type="checkbox" name="isCorrect"/>
+	</div>
+	<input class="btn btn-default" type="submit" value="Add"/>
+}
+
+@Html.ActionLink("<<Back","Index","Question")

@@ -1,0 +1,76 @@
+﻿@model TestsProject.Models.ViewModels.QuestionDetailsVM
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div class="row">
+	<div class="col-md-6">
+		<div>
+			<h4>Question</h4>
+			<hr />
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(model => model.Question.Topic.Name)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Question.Topic.Name)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.Question.QuestionText)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Question.QuestionText)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.Question.Explanation)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Question.Explanation)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(model => model.Question.NumPoints)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(model => model.Question.NumPoints)
+				</dd>
+			</dl>
+		</div>
+		<h4>Statistics:</h4>
+		<b>The question was answered @Html.DisplayFor(q => q.QuestionStats.TimesAnswered) times</b>
+		@if (Model.QuestionStats.TimesAnswered != 0)
+		{
+			<table class="table">
+				<tr>
+					<th>Answer</th>
+					<th>Times selected</th>
+				</tr>
+				@foreach (var ans in Model.AnswerStats)
+				{
+					<tr>
+						<td>@Html.DisplayFor(a => ans.Answer.Text)</td>
+						<td>@Html.DisplayFor(a => ans.TimesSelected)</td>
+					</tr>
+				}
+			</table>
+		}
+	</div>
+	@if (Model.QuestionStats.TimesAnswered != 0)
+	{
+		<div class="col-md-6">
+			<img src="@Url.Action("ChartQuestionStats", "Chart", new {id = @Model.Question.QuestionId})" />
+		</div>
+	}
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Question.QuestionId }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

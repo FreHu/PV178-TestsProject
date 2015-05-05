@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TestsProject.Models.Entities.TestStats>
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewBag.Title = "Teacher";
+}
+<br />
+<br />
+@if (ViewBag.ErrorMessage != null)
+{
+	<div class="alert alert-danger" role="alert">
+		@ViewBag.ErrorMessage
+	</div>
+}
+
+<div class="row">
+	<div class="col-md-4">
+		<h2>@Html.ActionLink("Questions", "Index", "Question")</h2>
+		<p>
+			Manage questions and answers
+		</p>
+	</div>
+	<div class="col-md-3">
+		<h2>@Html.ActionLink("Topics", "Index", "Topic")</h2>
+		<p>Manage topics</p>
+	</div>
+	<div class="col-md-4">
+		<h2>@Html.ActionLink("Students", "Students", "Teacher")</h2>
+		<p>View registered students and their test results</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4">
+		<h2>@Html.ActionLink("Groups", "Index", "StudentGroup")</h2>
+		<p>
+			Manage student groups
+		</p>
+	</div>
+	<div class="col-md-6">
+		<h2>@Html.ActionLink("Tests", "Index", "TestParameters")</h2>
+		<p>Manage tests</p>
+	</div>
+</div>
+
+<hr/>
+<h3>Latest completed tests:</h3>
+<div class="row">
+	@foreach (var stats in Model)
+	{
+		<div class="col-md-6">
+			<br />
+			<img src="@Url.Action("ChartTestResults", "Chart", new {id = @stats.Id})" />
+			<br />
+		</div>
+	}
+</div>

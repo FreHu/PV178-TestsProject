@@ -1,0 +1,77 @@
+﻿@model TestsProject.Models.ViewModels.TakeTestVM
+@{
+    ViewBag.Title = "Take";
+}
+<script type="text/javascript">
+	function startTimer(duration, display) {
+		var timer = duration, minutes, seconds;
+		setInterval(function() {
+			minutes = parseInt(timer / 60, 10)
+			seconds = parseInt(timer % 60, 10);
+
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
+
+			display.text(minutes + ":" + seconds);
+
+			if (--timer < 0) {
+				document.getElementById("testForm").submit();
+			}
+		}, 1000);
+	}
+
+	jQuery(function($) {
+		var timePeriod = 60 * @Html.ValueFor(m=>Model.TestParameters.TimeLimit),
+			display = $('#time');
+		startTimer(timePeriod, display);
+	});
+</script>
+
+<h2>Good luck!</h2>
+
+@using (Html.BeginForm("Submit", "Test",FormMethod.Post,new {id="testForm"}))
+{
+	@Html.HiddenFor(m=>Model.TestParameters.Id)
+	@Html.Hidden("startDate", DateTime.Now)
+
+	foreach (var item in Model.SingleChoiceQuestions)
+	{
+		
+		@Html.HiddenFor(m=>item.QuestionId)
+		<p>@Html.DisplayFor(i => item.QuestionText)</p>
+
+		var r = new Random();
+		var list = item.Answers.OrderBy(x => r.Next()).ToList();
+
+		foreach (var ans in list)
+		{
+			 <input type="radio" class="radio-inline" name="@Html.ValueFor(i=>item.QuestionId)" value="@Html.ValueFor(a => ans.AnswerId)"/>@Html.DisplayFor(i => ans.Text)
+			 <br/>
+		 }
+		<hr />
+	}
+	foreach (var item in Model.MultipleChoiceQuestions)
+	{
+		@Html.HiddenFor(m=>item.QuestionId)
+		<p>@Html.DisplayFor(i => item.QuestionText)</p>
+		{ 
+			var r = new Random();
+			var list = item.Answers.OrderBy(x=>r.Next()).ToList();
+
+			foreach (var ans in list)
+			{
+				<input type="checkbox" class="checkbox-inline" name="@Html.ValueFor(i => item.QuestionId)" value="@Html.ValueFor(a => ans.AnswerId)"/>
+				@Html.DisplayFor(i => ans.Text)
+				<br/>
+			}
+		}
+		<hr />
+	}
+	<input type="submit" class="btn-danger" value="Submit"/>
+}
+
+<div class="navbar-fixed-bottom">
+	<div id="timer">
+		You still have <span id="time"></span> minutes. Submit in time or the results won't count!
+	</div>
+</div>

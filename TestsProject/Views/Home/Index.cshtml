@@ -1,0 +1,20 @@
+﻿@{
+	ViewBag.Title = "Home Page";
+}
+<div class="jumbotron">
+	<h1>Welcome to TESTS</h1>
+	<p>The Exceptional Student Testing System</p>
+	<p>This is a demo, use the accounts teacher, jano, fero, zuza, student for testing. You can create new accounts, but there is currently no way to give them teacher permissions. The password for all accounts is "Heslo6!"</p>
+</div>
+<div class="row">
+	<div class="col-md-6">
+		<h2>@Html.ActionLink("Student","Index","Student")</h2>
+		<p>
+			Here you can take tests and view your previous results.
+		</p>
+	</div>
+	<div class="col-md-6">
+		<h2>@Html.ActionLink("Teacher","Index","Teacher")</h2>
+		<p>See how your students are doing or create new tests.</p>
+	</div>
+</div>

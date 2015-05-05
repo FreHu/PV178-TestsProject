@@ -1,0 +1,36 @@
+﻿@model TestsProject.Models.ViewModels.EditGroupsVM
+@{
+    ViewBag.Title = "Add Group to Test";
+}
+
+<h2>Test Parameters - Edit Groups</h2>
+@if (ViewBag.ErrorMessage != null)
+{
+	<div class="alert alert-danger" role="alert">
+		@ViewBag.ErrorMessage
+	</div>
+}
+<b>You are editing: </b>@Html.DisplayFor(i=>Model.TestParameters.Name)
+<br/>
+<br/>
+@using (Html.BeginForm("NewGroup", "TestParameters"))
+{
+	<input type="hidden" value="@Model.TestParameters.Id" name="parametersId" />
+	foreach (var group in Model.StudentGroups)
+	{
+		if (Model.TestParameters.AllowedGroups.Contains(group))
+		{
+			<input type="checkbox" name="@Html.ValueFor(i => group.Code)" checked="checked" />
+		}
+		else
+		{
+			<input type="checkbox" name="@Html.ValueFor(i => group.Code)" />
+		}
+		@Html.DisplayFor(i => group.Code)
+		<span>-</span>
+		@Html.DisplayFor(i => group.Name)<br />
+	}
+	<input type="submit" value="Update" />
+}
+
+@Html.ActionLink("<<Back","Index","TestParameters")

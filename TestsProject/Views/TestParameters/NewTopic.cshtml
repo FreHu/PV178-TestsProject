@@ -1,0 +1,31 @@
+﻿@model TestsProject.Models.ViewModels.NewTopicVM
+
+@{
+    ViewBag.Title = "Add Topic to Test";
+}
+
+<h2>Add topic to test @Html.DisplayFor(i => Model.TestParameters.Name)</h2>
+<br/>
+@using (Html.BeginForm("NewTopic", "TestParameters"))
+{
+	<input type="hidden" value="@Model.TestParameters.Id" name="parametersId"/>
+	foreach (var topic in Model.Topics)
+	{
+		if (topic.TestParameters.Contains(Model.TestParameters))
+		{
+			<input type="checkbox" name="@Html.ValueFor(i => topic.TopicId)" checked="checked"/>
+		}
+		else
+		{
+			<input type="checkbox" name="@Html.ValueFor(i => topic.TopicId)" />
+		}
+		@Html.DisplayFor(i => topic.Name)<br/>
+	}
+	<input type="submit" value="Update" />
+}
+
+<hr/>
+<p>
+    
+    @Html.ActionLink("Back to List", "Index")
+</p>

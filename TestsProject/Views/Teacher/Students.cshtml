@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TestsProject.Models.Entities.ApplicationUser>
+
+@{
+	ViewBag.Title = "Index";
+}
+<h2>Students</h2>
+<table class="table">
+	<thead>
+	<tr>
+		<th>Username</th>
+		<th>E-mail</th>
+		<th></th>
+	</tr>
+	</thead>
+	@foreach (var user in Model)
+	{
+		<tr>
+			<td>@Html.ValueFor(m => user.UserName)</td>
+			<td>@Html.ValueFor(m => user.Email)</td>
+			<td>@Html.ActionLink("Details", "Student", new {id = user.Id})</td>
+		</tr>
+	}
+</table>
+
+@Html.ActionLink("<<Back","Index")

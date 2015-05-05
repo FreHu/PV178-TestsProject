@@ -1,0 +1,35 @@
+﻿@model TestsProject.Models.ViewModels.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+	<dl class="dl-horizontal">
+		<dt>Username:</dt>
+		<dd>
+			@Model.Username
+		</dd>
+		<dt>E-mail:</dt>
+		<dd>
+			@Model.Email
+		</dd>
+		<dt>Password:</dt>
+		<dd>
+			[
+			@if (Model.HasPassword)
+			{
+				@Html.ActionLink("Change your password", "ChangePassword")
+			}
+			else
+			{
+				@Html.ActionLink("Create", "SetPassword")
+			}
+			]
+		</dd>
+	</dl>
+</div>

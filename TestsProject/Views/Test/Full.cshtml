@@ -1,0 +1,56 @@
+﻿@model TestsProject.Models.Entities.CompletedTest
+@{
+	ViewBag.Title = "Full";
+}
+<h2>Viewing full test</h2>
+<button type="button" class="btn btn-info" data-toggle="collapse" data-target=".collapse">Show explanations</button>
+@foreach (var question in Model.SubmittedQuestions)
+{
+	<h4>@Html.ValueFor(q => question.Question.QuestionText)</h4>
+	
+	<table class="table">
+		<tr>
+
+		</tr>
+		@foreach (var answer in question.Question.Answers)
+		{
+			<tr>
+				@if (question.SelectedAnswers.Select(a => a.AnswerId).Contains(answer.AnswerId)) //answer was selected
+				{
+					if (answer.IsCorrect)
+					{
+						<td class="correctSelected">@Html.ValueFor(a => answer.Text)</td>
+					}
+					else
+					{
+						<td class="incorrectSelected">@Html.ValueFor(a => answer.Text)</td>
+					}
+
+				}
+				else
+				{
+					if (answer.IsCorrect)
+					{
+						<td class="correctNotSelected">@Html.ValueFor(a => answer.Text)</td>
+					}
+					else
+					{
+						<td class="incorrectNotSelected">@Html.ValueFor(a => answer.Text)</td>
+					}
+				}
+			</tr>
+		}
+	</table>
+	<div class="row">
+		<div class="col-md-10">
+			<div class="collapse">
+				<b>Explanation: </b>@Html.ValueFor(a => question.Question.Explanation)
+			</div>
+		</div>
+		<div class="col-md-2">
+			<b>Points: </b>@Html.ValueFor(q => question.Score) @Html.Raw("/") @Html.ValueFor(q => question.Question.NumPoints)
+		</div>
+	</div>
+<hr class="myhr" />
+}
+@Html.ActionLink("<<Back", null, null, null, new { href = Request.UrlReferrer })

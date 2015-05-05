@@ -1,0 +1,10 @@
+﻿DROP table _MigrationHistory
+DROP table Answers
+DROP table AspNetRoles
+DROP table AspNetUserClaims
+DROP table AspNetUserLogins
+DROP table AspNetUsers
+DROP table Questions
+DROP table StudentGroupMemberships
+DROP table StudentGroups
+DROP table Topics
