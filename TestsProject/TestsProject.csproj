@@ -215,7 +215,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Properties\PublishProfiles\testsproject %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\projecttests %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\projecttests %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\projecttests.pubxml" />
     <None Include="Properties\PublishProfiles\TestsProject - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\TestsProject - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\TestsProject.pubxml" />

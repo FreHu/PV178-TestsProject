@@ -76,8 +76,8 @@ namespace TestsProject.Controllers
 					Question = question,
 					QuestionId = questionId
 				};
-				StatsManager.AddAnswerStats(answer,db);
 				db.Answers.Add(answer);
+				StatsManager.AddAnswerStats(answer, db);
 				db.SaveChanges();
 			}
 			else
